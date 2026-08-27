@@ -75,7 +75,7 @@ const PetInfo = () => {
     return (
         <section className="mb-12 mx-6">
             <div className="container m-auto">
-                <nav className='p-8 sticky top-20 left-0 right-0 bg-surface'>
+                <nav className='py-8 sticky top-20 left-0 right-0 bg-surface'>
                     <ul className='flex items-center gap-3 text-xs'>
                         <li>
                             <Link to="/" className='hover:text-highlight transition'>Adotar</Link>

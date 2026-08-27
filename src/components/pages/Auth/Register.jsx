@@ -5,13 +5,15 @@ import { AuthContext } from '../../../context/AuthProvider';
 import { Loader } from 'lucide-react';
 import Input from '../../form/Input';
 import Logo from '../../layout/Logo';
+import { toast } from 'sonner';
+import { baseUrl } from '../../../utils/baseUrl';
 
 
 const Register = () => {
     const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "", phone: "" });
 
     const { token } = useContext(AuthContext);
-    const { register, status } = useAuth();
+    const [status, setStatus] = useState("idle");
 
     const navigate = useNavigate();
 
@@ -19,6 +21,41 @@ const Register = () => {
         navigate("/");
         return;
     }
+
+    const register = async (user) => {
+        setStatus("loading");
+        try {
+            const res = await fetch(`${baseUrl}/users/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(user)
+
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                setStatus("error");
+
+                if ("errors" in data) {
+                    toast.error(data.errors[0].msg);
+                } else if ("msg" in data) {
+                    toast.error(data.msg);
+                }
+
+                return false;
+            }
+
+            toast.success(data.msg);
+
+            setStatus("success");
+        } catch (error) {
+            setStatus("error");
+            toast.error(error.message);
+        }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
