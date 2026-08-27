@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate("/");
     window.location.reload(false);
     toast.success("Você foi deslogado.");
   };
