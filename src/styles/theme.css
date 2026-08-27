@@ -1,0 +1,11 @@
+@theme inline {
+  --color-surface: #FFF8F3;       /* tom suave de fundo, aconchegante */
+  --color-card: #FFFFFF;          /* branco puro para cartões e seções */
+  --color-primary: #FF7A00;       /* laranja vibrante, energia e carinho */
+  --color-on-primary: #ffffff;
+  --color-muted: #5C5C5C;         /* cinza neutro para textos secundários */
+  --color-accent: #4CAF50;        /* verde esperança, natureza e adoção */
+  --color-secondary: #FFD180;     /* tom pastel para detalhes e hover */
+  --color-highlight: #FFB74D;     /* realce quente para botões e ícones */
+}
+

@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import "./theme.css";
+@import "./fonts.css";
+
+body {
+    font-family: var(--font-body);
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    background-color: var(--color-surface);
+    color: var(--color-muted);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-title);
+    font-weight: 700;
+}
