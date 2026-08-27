@@ -73,7 +73,7 @@ const PetInfo = () => {
     }
 
     return (
-        <section className="mb-12">
+        <section className="mb-12 mx-6">
             <div className="container m-auto">
                 <nav className='p-8 sticky top-20 left-0 right-0 bg-surface'>
                     <ul className='flex items-center gap-3 text-xs'>
@@ -82,7 +82,7 @@ const PetInfo = () => {
                             <span className='inline ml-1'>/</span>
                         </li>
                         <li>
-                            <Link to="/pets/mine" className='hover:text-highlight transition'>Meus Pets</Link>
+                            <Link to="/pets/mine" className='hover:text-highlight transition'>Pets</Link>
                             <span className='inline ml-1'>/</span>
                         </li>
                         <li>
