@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
 import { useToken } from "../../../hooks/useToken";
@@ -12,6 +12,8 @@ import { toast } from "sonner";
 const MyAdoptions = () => {
     const { token } = useToken();
     const [adoptions, setAdoptions] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchAdoptions = async () => {
@@ -54,6 +56,7 @@ const MyAdoptions = () => {
             }
         }).then((data) => {
             toast.success(data.msg);
+            navigate("/pets/adoptions");
         }).catch((error) => {
             toast.error(error);
         })
