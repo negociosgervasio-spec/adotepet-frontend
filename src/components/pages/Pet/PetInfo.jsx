@@ -43,6 +43,7 @@ const PetInfo = () => {
     }, [id]);
 
     const adoptAPet = async (id) => {
+        setLoading(true);
         if (!token) {
             return navigate("/login");
         }
@@ -55,10 +56,13 @@ const PetInfo = () => {
 
             }
         }).then((res) => {
+            setLoading(false);
             return res.json();
         }).then((data) => {
             toast.info(data.msg);
+            navigate(`/pets/adoptions`);
         }).catch((error) => {
+            setLoading(false);
             toast.error(error);
         })
     };
@@ -163,12 +167,14 @@ const PetInfo = () => {
                     </div>
 
                     <button type="button" onClick={() => adoptAPet(pet._id)} className="flex items-center justify-center p-4 bg-highlight hover:bg-primary text-on-primary transition rounded-full">
-                        <HeartHandshakeIcon size={24} />
-                        <span className="ml-3">Adotar</span>
+                        {!loading && <><HeartHandshakeIcon size={24} />
+                            <span className="ml-3">Adotar</span></>
+                        }
+
+                        {loading &&
+                            <Loader size={24} className="animate-spin" />
+                        }
                     </button>
-
-                    
-
                 </article>
             </div>
         </section>
