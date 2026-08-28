@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { baseUrl } from "../../../utils/baseUrl";
 import { toast } from "sonner";
-import { Balloon, Calendar, Circle, Heart, HeartHandshakeIcon, Loader, Paintbrush, Weight } from "lucide-react";
+import { Balloon, Heart, HeartHandshakeIcon, Loader, Paintbrush, Weight } from "lucide-react";
 
 import { useToken } from "../../../hooks/useToken";
-import { useUserId } from "../../../hooks/useUserId";
 
 const PetInfo = () => {
     const { id } = useParams();

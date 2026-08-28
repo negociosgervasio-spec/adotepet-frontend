@@ -1,24 +1,23 @@
-import { useContext, useState } from 'react'
-import useAuth from '../../../hooks/useAuth';
+import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { AuthContext } from '../../../context/AuthProvider';
 import { Loader } from 'lucide-react';
 import Input from '../../form/Input';
 import Logo from '../../layout/Logo';
 import { toast } from 'sonner';
 import { baseUrl } from '../../../utils/baseUrl';
+import { useToken } from '../../../hooks/useToken';
 
 
 const Register = () => {
     const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "", phone: "" });
 
-    const { token } = useContext(AuthContext);
+    const { token } = useToken();
     const [status, setStatus] = useState("idle");
 
     const navigate = useNavigate();
 
     if (token) {
-        navigate("/");
+        navigate("/pets/mine");
         return;
     }
 
@@ -51,6 +50,7 @@ const Register = () => {
             toast.success(data.msg);
 
             setStatus("success");
+            return true;
         } catch (error) {
             setStatus("error");
             toast.error(error.message);

@@ -8,6 +8,7 @@ import { baseUrl } from "../../../utils/baseUrl";
 import CardGrid from "../../../components/layout/CardGrid.jsx";
 import PetsCard from "../../../components/layout/PetsCard.jsx";
 import { toast } from "sonner";
+import { refreshPage } from "../../../utils/refreshPage.jsx";
 
 const MyAdoptions = () => {
     const { token } = useToken();
@@ -56,7 +57,7 @@ const MyAdoptions = () => {
             }
         }).then((data) => {
             toast.success(data.msg);
-            navigate("/pets/adoptions");
+            refreshPage();
         }).catch((error) => {
             toast.error(error);
         })
@@ -80,7 +81,7 @@ const MyAdoptions = () => {
                 <CardGrid>
                     {adoptions && adoptions.length > 0 ? (
                         adoptions.map((pet) => (
-                            <PetsCard key={pet._id} pet={pet} route="/pets/adoptions/">
+                            <PetsCard key={pet._id} pet={pet} route={`/pets/adoptions`}>
                                 {pet.available &&
                                     <button type="button" onClick={() => { handleConcludeAdoptions(pet._id) }} className="px-3 py-2 bg-highlight hover:bg-primary transition text-on-primary rounded-lg">Concluir Adoção</button>
                                 }

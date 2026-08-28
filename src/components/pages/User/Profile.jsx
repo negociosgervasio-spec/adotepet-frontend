@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
 import Input from "../../form/Input";
 import { Loader } from "lucide-react";
 import { useToken } from "../../../hooks/useToken";
 import { baseUrl } from "../../../utils/baseUrl";
+import { toast } from "sonner";
 
 const Profile = () => {
   const { token } = useToken(); // corrigido: hook precisa ser chamado
@@ -15,8 +15,83 @@ const Profile = () => {
     return null;
   }
 
-  const { user, status, editUserById } = useAuth();
+  const [status, setStatus] = useState("idle");
+  const [user, setUser] = useState({});
+
   const [form, setForm] = useState(user || {});
+
+  useEffect(() => {
+
+    const loadProfile = async () => {
+      setStatus("loading");
+      try {
+        const res = await fetch(`${baseUrl}/users/profile`, {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+          }
+
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          setStatus("success");
+          setUser(data.user);
+          console.log(data.user);
+        } else {
+          setStatus("error");
+          console.error(data);
+          toast.error(data.msg);
+        }
+      } catch (error) {
+        console.error(error);
+        setStatus("error");
+        toast.error(error, "error");
+      }
+    };
+    if (token) {
+      loadProfile();
+    }
+  }, [token]);
+
+  const editUserById = async (id, data) => {
+    setStatus("loading");
+    try {
+      const res = await fetch(`${baseUrl}/users/edit/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Authorization": `Bearer ${token}`
+          // NÃO coloque Content-Type aqui
+        },
+        body: data // data precisa ser um FormData
+      });
+
+      const payload = await res.json();
+
+      if (!res.ok) {
+        setStatus("error");
+
+        if ("errors" in payload) {
+          toast.error(payload.errors[0].msg);
+        } else if ("msg" in payload) {
+          toast.error(payload.msg);
+        }
+        return false;
+      }
+
+      setStatus("success");
+      toast.success(payload.msg);
+
+      return true;
+
+    } catch (error) {
+      console.error(error);
+      setStatus("error");
+      toast.error(error.message || "Erro inesperado");
+    }
+  }
 
 
   useEffect(() => {

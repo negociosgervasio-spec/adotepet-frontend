@@ -1,5 +1,4 @@
-import { useContext, useState } from 'react'
-import useAuth from '../../../hooks/useAuth';
+import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import { Loader } from 'lucide-react';
 import Input from '../../form/Input';
@@ -7,29 +6,24 @@ import Logo from '../../layout/Logo';
 import { toast } from 'sonner';
 import { baseUrl } from '../../../utils/baseUrl';
 import { useToken } from '../../../hooks/useToken';
-import {useUserId}  from '../../../hooks/useUserId';
+import {refreshPage} from "../../../utils/refreshPage";
 
 const Login = () => {
     const [form, setForm] = useState({ email: "", password: "" });
 
     const [status, setStatus] = useState();
 
-    const { saveItem , token} = useToken();
-    const { saveUserId } = useUserId();
+    const { saveItem, token } = useToken();
 
     const navigate = useNavigate();
 
-    if(token) {
+    if (token) {
         return navigate("/pets/mine")
     }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm((prev) => ({ ...prev, [name]: value }));
-    };
-
-    const refreshPage = () => {
-        window.location.reload(false);
     };
 
     const login = async (form) => {
@@ -49,13 +43,13 @@ const Login = () => {
                 setStatus("error");
                 if ("errors" in data) {
                     toast.error(data.errors[0].msg);
+                } else if ("msg" in data) {
+                    toast.error(data.msg);
                 }
                 return false;
             }
 
             saveItem(data.token);
-
-            saveUserId(data.userId);
 
             toast.success(data.msg);
 

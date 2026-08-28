@@ -40,7 +40,7 @@ const PetsMine = () => {
 
 
   return (
-    <section className="my-12 px-6">
+    <section className="my-12 ">
       <div className="relative container m-auto">
         <div className="my-8 py-4 overflow-hidden flex flex-wrap gap-6 justify-between items-center sticky top-22 z-40 bg-surface">
           <h1 className="text-accent font-extrabold text-4xl">Meus Pets</h1>
@@ -52,7 +52,7 @@ const PetsMine = () => {
 
         <CardGrid>
           {userPets && userPets.map((pet) => (
-            <PetsCard pet={pet} route="/pets/mine/"/>
+            <PetsCard pet={pet} route={`/pets/mine/${pet._id}`}/>
           ))}
         </CardGrid>
 

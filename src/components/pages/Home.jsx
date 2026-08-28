@@ -13,7 +13,7 @@ const Hero = () => {
 
   return (
     <section className="relative flex items-center justify-start h-screen px-3">
-      <img src={HeroImg} alt="Imagem Ilustrativa" className="h-full w-full absolute inset-0 brightness-50" />
+      <img src="https://images.pexels.com/photos/13869571/pexels-photo-13869571.jpeg" alt="Imagem Ilustrativa" className="h-full w-full absolute inset-0 brightness-90" />
       {/* Conteúdo principal */}
       <div
         className="relative flex flex-col text-white p-4 max-w-sm">
@@ -73,7 +73,7 @@ const Pets = () => {
         <p className="mb-12">Conheça alguns dos nossos pets esperando por um lar</p>
         <CardGrid>
           {pets.map((pet) => (
-            <PetsCard key={pet._id} pet={pet} />
+            <PetsCard key={pet._id} pet={pet} route={`/pets/${pet._id}`}/>
           ))}
         </CardGrid>
       </div>
@@ -91,4 +91,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Home;

@@ -2,18 +2,18 @@ import { useState, useContext } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { LogOut, Menu, User, X, Dot } from "lucide-react";
 import { toast } from 'sonner';
-import { AuthContext } from '../../context/AuthProvider';
 import Logo from './Logo';
+import { useToken } from '../../hooks/useToken';
 
 const Navbar = () => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
 
-  const { token, logout } = useContext(AuthContext);
+  const { token, removeItem } = useToken();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout();
+    removeItem();
     navigate("/");
     window.location.reload(false);
     toast.success("Você foi deslogado.");
@@ -42,7 +42,7 @@ const Navbar = () => {
 
         {/* Logo */}
         <Link to={"/"} className="font-[Edu_NSW_ACT_Cursive] flex items-center gap-1">
-          <Logo size={16} padding={4}/>
+          <Logo size={16} padding={4} />
           <p className="text-2xl hover:text-secondary transition italic">adotePet</p>
         </Link>
 
