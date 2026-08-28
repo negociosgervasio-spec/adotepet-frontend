@@ -64,10 +64,10 @@ const MyAdoptions = () => {
     };
 
     return (
-        <section className="my-12 px-6">
+        <section className="px-6 md:p-0">
             <div className="relative container m-auto">
                 <div className="my-8 py-4 overflow-hidden flex flex-wrap gap-6 justify-between items-center sticky top-22 z-40 bg-surface">
-                    <h1 className="text-accent font-extrabold text-4xl">Minhas Adoções</h1>
+                    <h1 className="font-extrabold text-4xl">Minhas Adoções</h1>
                     <Link
                         to={"/"}
                         className="bg-primary hover:bg-highlight text-on-primary transition px-4 py-3 rounded-lg"

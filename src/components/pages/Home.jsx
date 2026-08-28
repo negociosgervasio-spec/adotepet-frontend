@@ -67,7 +67,7 @@ const Pets = () => {
   }, [userId]);
 
   return (
-    <section id="pets" className="px-6 py-16">
+    <section id="pets" className="px-6 md:px-0 py-16">
       <div className="text-center ">
         <h2 className="text-4xl mb-2">Pets em Destaque</h2>
         <p className="mb-12">Conheça alguns dos nossos pets esperando por um lar</p>

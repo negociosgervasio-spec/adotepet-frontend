@@ -44,7 +44,7 @@ const PetInfo = () => {
     const adoptAPet = async (id) => {
         setLoading(true);
         if (!token) {
-            return navigate("/login");
+            return navigate("/register");
         }
         setLoading(true);
         fetch(`${baseUrl}/pets/schedule/${id}`, {

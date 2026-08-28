@@ -40,25 +40,22 @@ const PetsMine = () => {
 
 
   return (
-    <section className="my-12 ">
-      <div className="relative container m-auto">
-        <div className="my-8 py-4 overflow-hidden flex flex-wrap gap-6 justify-between items-center sticky top-22 z-40 bg-surface">
-          <h1 className="text-accent font-extrabold text-4xl">Meus Pets</h1>
-          <Link to={"/pets/register"} className="bg-primary hover:bg-highlight text-on-primary transition px-4 py-3 rounded-lg">
-            <span> Cadastrar Pet </span>
-            <ArrowUpRight size={24} className="inline ml-1 mb-2" />
-          </Link>
-        </div>
-
-        <CardGrid>
-          {userPets && userPets.map((pet) => (
-            <PetsCard pet={pet} route={`/pets/mine/${pet._id}`}/>
-          ))}
-        </CardGrid>
-
-        {!userPets && <p>Você ainda não cadastro nenhum pet.</p>}
-
+    <section className="my-12 px-6 md:p-0">
+      <div className="my-8 py-4 overflow-hidden flex flex-wrap gap-6 justify-between items-center sticky top-22 z-40 bg-surface">
+        <h1 className="font-extrabold text-4xl">Meus Pets</h1>
+        <Link to={"/pets/register"} className="bg-primary hover:bg-highlight text-on-primary transition px-4 py-3 rounded-lg">
+          <span> Cadastrar Pet </span>
+          <ArrowUpRight size={24} className="inline ml-1 mb-2" />
+        </Link>
       </div>
+
+      <CardGrid>
+        {userPets && userPets.map((pet) => (
+          <PetsCard pet={pet} route={`/pets/mine/${pet._id}`} />
+        ))}
+      </CardGrid>
+
+      {!userPets && <p>Você ainda não cadastro nenhum pet.</p>}
     </section>
   );
 }

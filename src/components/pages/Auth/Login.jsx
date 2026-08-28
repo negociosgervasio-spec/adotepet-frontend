@@ -80,7 +80,7 @@ const Login = () => {
                     <div className="grid gap-8">
                         <div className="grid gap-3 text-center items-center justify-center">
                             <Logo />
-                            <h1 className='text-3xl font-bold block text-accent text-center mt-3'>Bem-vindo de volta!</h1>
+                            <h1 className='text-3xl font-bold block  text-center mt-3'>Bem-vindo de volta!</h1>
                             <p>Entre para continuar sua jornada de adoção</p>
                         </div>
                         <Input type="text" name={"email"} placeholder={"seu@email.com"} value={form.email} onChange={handleChange} text={"Email"} />

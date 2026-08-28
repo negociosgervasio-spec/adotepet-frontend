@@ -79,7 +79,7 @@ const Register = () => {
                     <div className="grid gap-8">
                         <div className="grid gap-3 text-center items-center justify-center">
                             <Logo />
-                            <h1 className='text-3xl font-bold block text-accent text-center mt-3'>Bem-vindo!</h1>
+                            <h1 className='text-3xl font-bold block text-center mt-3'>Bem-vindo!</h1>
                             <p>Cadastre-se para continuar sua jornada de adoção</p>
                         </div>
                         <Input type="text" name={"name"} placeholder={"Seu nome"} value={form.name} onChange={handleChange} text={"Nome"} />

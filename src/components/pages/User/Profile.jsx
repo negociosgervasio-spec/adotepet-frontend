@@ -127,7 +127,7 @@ const Profile = () => {
       <div className="max-w-md m-auto px-6 py-12 bg-card rounded-2xl shadow-2xl">
         <form onSubmit={handleSubmit}>
           <div className="grid gap-8">
-            <h1 className="text-3xl font-bold block text-accent text-center">
+            <h1 className="text-3xl font-bold block  text-center">
               Atualizar Perfil
             </h1>
 
