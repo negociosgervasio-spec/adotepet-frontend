@@ -74,7 +74,7 @@ const Login = () => {
 
 
     return (
-        <section className="p-6 ">
+        <section className="p-6">
             <div className="max-w-md m-auto px-6 py-12 bg-card rounded-2xl shadow-2xl">
                 <form onSubmit={handleSubmit}>
                     <div className="grid gap-8">

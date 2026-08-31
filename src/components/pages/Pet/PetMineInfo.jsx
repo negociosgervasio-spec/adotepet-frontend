@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { baseUrl } from "../../../utils/baseUrl";
 import { toast } from "sonner";
-import { Balloon, Heart, HeartHandshakeIcon, Loader, Paintbrush, Weight } from "lucide-react";
+import { Balloon, Heart, HeartHandshakeIcon, Loader, Paintbrush, TrashIcon, Weight } from "lucide-react";
 
 import { useToken } from "../../../hooks/useToken";
 
@@ -170,8 +170,13 @@ const PetMineInfo = () => {
                         </Link>
 
                         <button type="button" onClick={() => removePet(pet._id)} className="flex items-center justify-center p-4 bg-red-600 hover:bg-red-400 text-on-primary transition rounded-full">
-                            <HeartHandshakeIcon size={24} />
-                            <span className="ml-3">Remover</span>
+                            {loading && <Loader className="animate-spin" />}
+
+                            {!loading && <>
+                                <TrashIcon size={24} />
+                                <span className="ml-3">Remover</span>
+                            </>}
+
                         </button>
                     </div>
 

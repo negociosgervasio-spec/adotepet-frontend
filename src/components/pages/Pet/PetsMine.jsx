@@ -9,15 +9,16 @@ import { baseUrl } from "../../../utils/baseUrl";
 
 import CardGrid from "../../../components/layout/CardGrid.jsx";
 import PetsCard from "../../../components/layout/PetsCard.jsx";
-import { toast } from "sonner";
+import LoaderComponent from "../../layout/LoaderComponent.jsx";
 
 const PetsMine = () => {
   const { token } = useToken();
   const [userPets, setUserPets] = useState([]);
+  const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {
-
+    setLoading(true);
     fetch(`${baseUrl}/pets/mine`, {
       method: "GET",
       headers: {
@@ -34,9 +35,16 @@ const PetsMine = () => {
       console.log(data);
     }).catch((err) => {
       console.error(err);
+    }).finally(() => {
+      setLoading(false);
     });
 
   }, []);
+
+  if (loading) {
+    return <LoaderComponent text="Carregando seus pets..." />;
+  }
+
 
 
   return (

@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Balloon, Heart, HeartHandshakeIcon, Loader, Paintbrush, Weight } from "lucide-react";
 
 import { useToken } from "../../../hooks/useToken";
+import PetImages from "../../layout/PetImages";
 
 const PetInfo = () => {
     const { id } = useParams();
@@ -95,32 +96,7 @@ const PetInfo = () => {
                 </nav>
 
                 <article className="flex flex-col gap-8">
-                    {pet.images && pet.images.length > 0 && (
-                        <img
-                            src={`${baseUrl}/images/pets/${pet.images[previewIndex]}`}
-                            alt={pet.name}
-                            className={`w-full h-140 object-center object-cover rounded-2xl col-span-2 transition-opacity duration-500 ${fade ? "opacity-0" : "opacity-100"}`}
-                            onMouseEnter={() => {
-                                if (pet.images.length > 1) {
-                                    setFade(true);
-                                    setTimeout(() => {
-                                        setPreviewIndex(1);
-                                        setFade(false);
-                                    }, 300); // tempo da transição
-                                }
-                            }}
-                            onMouseLeave={() => {
-                                setFade(true);
-                                setTimeout(() => {
-                                    setPreviewIndex(0);
-                                    setFade(false);
-                                }, 300);
-                            }}
-                        />
-
-
-
-                    )}
+                   <PetImages pet={pet}/>
 
                     <span className="">
                         <h4 className="text-2xl font-extrabold">{pet.name}</h4>

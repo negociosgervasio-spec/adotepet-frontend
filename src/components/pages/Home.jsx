@@ -3,11 +3,14 @@ import { useEffect, useState } from "react";
 
 // components
 import HeroImg from "../../assets/img/hero.jpg";
+import LoaderComponent from "../layout/LoaderComponent";
 
 // utils
 import { baseUrl } from "../../utils/baseUrl";
 import CardGrid from "../layout/CardGrid";
 import PetsCard from "../layout/PetsCard";
+import { useToken } from "../../hooks/useToken";
+import { toast } from "sonner";
 
 const Hero = () => {
 
@@ -37,45 +40,53 @@ const Hero = () => {
 
 const Pets = () => {
   const [pets, setPets] = useState([]);
-  const userId = localStorage.getItem("userId"); // pega o id do usuário logado
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${baseUrl}/pets`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        // Filtra os pets para não mostrar os do próprio usuário ou já adotados por ele
-        const filteredPets = data.filter((pet) => {
-          const isOwner = pet.user._id === userId;
-          const isAdopter = pet.adopter && pet.adopter._id === userId;
-          return !isOwner && !isAdopter;
-        });
+    const fetchPets = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/pets`, { method: "GET" });
+        const data = await res.json();
 
-        setPets(filteredPets);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [userId]);
+        if (!res.ok) {
+          if ("msg" in data) {
+            toast.error(data.msg);
+          }
+          return;
+        }
+        console.log(data);
+        setPets(data);
+      } catch (error) {
+        console.error("Erro ao carregar pets:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPets();
+  }, []);
+
+  if (loading) {
+    return <LoaderComponent text="Carregando seus pets..." />;
+  }
+
+  console.log("Pets cadastrado: ", pets);
 
   return (
     <section id="pets" className="px-6 md:px-0 py-16">
       <div className="text-center ">
         <h2 className="text-4xl mb-2">Pets em Destaque</h2>
         <p className="mb-12">Conheça alguns dos nossos pets esperando por um lar</p>
-        <CardGrid>
-          {pets.map((pet) => (
-            <PetsCard key={pet._id} pet={pet} route={`/pets/${pet._id}`}/>
-          ))}
-        </CardGrid>
+        {pets.length > 0 ? (
+          <CardGrid>
+            {pets.map((pet) => (
+              <PetsCard key={pet._id} pet={pet} route={`/pets/${pet._id}`} />
+            ))}
+          </CardGrid>
+        ) : (
+          <p className="text-muted">Nenhum pet cadastrado.</p>
+        )}
+
       </div>
     </section>
   );

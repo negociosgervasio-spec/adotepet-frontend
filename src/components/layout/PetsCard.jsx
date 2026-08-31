@@ -6,7 +6,7 @@ import { baseUrl } from "../../utils/baseUrl";
 
 const PetsCard = ({ pet, route = "/pets/", children }) => {
     return (
-        <li className="bg-card shadow rounded-2xl overflow-clip group hover:shadow-2xl hover:-translate-y-1 transition">
+        <li key={pet._id} className="bg-card shadow rounded-2xl overflow-clip group hover:shadow-2xl hover:-translate-y-1 transition">
             <Link to={route}>
                 <div className="overflow-hidden">
                     <img src={`${baseUrl}/images/pets/${pet.images[0]}`} alt={pet.name} className="h-80 w-full group-hover:scale-110 brightness-75 group-hover:brightness-100 trasition duration-1000" />
